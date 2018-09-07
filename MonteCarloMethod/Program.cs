@@ -16,11 +16,12 @@ namespace MonteCarloMethod
             y = p2;
         }
 
-        public CoOrds(double[] args) 
+        public CoOrds(Random random) 
         {
-            Random random = new Random();
-            x = random.NextDouble();
-            y = random.NextDouble();
+            
+           x = random.NextDouble();
+           y = random.NextDouble();
+          
           
         }
 
@@ -38,24 +39,34 @@ namespace MonteCarloMethod
             Console.WriteLine("How many?");
             int iterations = Convert.ToInt32(Console.ReadLine());
 
-            double[] coordinates = new double [iterations];
-            CoOrds coords = new CoOrds(coordinates);
-
-         
-            double inTheCircle = 0.0;
-
             Random random = new Random();
+            CoOrds coords = new CoOrds(random);
 
-            for (double i = 0.0; i <= iterations; ++i)
+            
+           
+
+
+
+            int inTheCircle = 0;
+
+
+           
+            for (double i = 0.0; i <= (double)iterations; ++i)
             {
                 double x = random.NextDouble();
                 double y = random.NextDouble();
-               if (Calculate(x,y) < 1.0)
+
+                double[,] coordinates = new double[,] { { x, y } };
+
+
+
+                if (Calculate(x,y) < 1.0)
                 {
                     inTheCircle++;
+                   
                 }
             }
-            double myEstimate = inTheCircle/iterations * 4.0;
+            double myEstimate = ((double)inTheCircle/(double)iterations) * 4.0;
 
 
 
